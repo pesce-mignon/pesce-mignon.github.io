@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>pesce-mignon</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <header>
+        <h1><a href="/">pesce-mignon</a></h1>
+        <p class="subtitle">personal experiences & recipes</p>
+    </header>
+    
+    <main>
+        <section class="content">
+            <p>Welcome. Here I share simple thoughts, experiences, and recipes.</p>
+            
+            <h2>Latest</h2>
+            <ul class="post-list">
+                <li><a href="recipes/first-recipe.html">First Recipe</a></li>
+                <li><a href="experiences/first-experience.html">First Experience</a></li>
+            </ul>
+        </section>
+    </main>
+    
+    <footer>
+        <p>© <span id="year"></span> pesce-mignon</p>
+    </footer>
+    
+    <script>
+        document.getElementById('year').textContent = new Date().getFullYear();
+    </script>
+</body>
+</html>
