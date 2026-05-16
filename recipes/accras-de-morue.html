@@ -1,16 +1,10 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Accras de Morue - Pesce Mignon</title>
-    <link rel="stylesheet" href="../style.css">
-</head>
+<!--#set var="TITLE" value="Accras de Morue - Pesce Mignon" -->
+<!--#set var="STYLE_PATH" value="../style.css" -->
+<!--#set var="HOME_LINK" value=".." -->
+<!--#set var="SCRIPT_PATH" value="../" -->
+<!--#include virtual="../includes/head.html" -->
 <body>
-    <header>
-        <h1><a href="..">Pesce Mignon</a></h1>
-        <p class="subtitle"><span class="en-text">personal experiences & recipes</span><span class="fr-text">expériences personnelles & recettes</span></p>
-    </header>
+    <!--#include virtual="../includes/header.html" -->
     
     <main>
         <article class="content">
@@ -67,13 +61,6 @@
         </article>
     </main>
     
-    <footer>
-        <p>© <span id="year"></span> pesce-mignon</p>
-    </footer>
-    
-    <script src="../js/lang.js"></script>
-    <script>
-        document.getElementById('year').textContent = new Date().getFullYear();
-    </script>
+    <!--#include virtual="../includes/footer.html" -->
 </body>
 </html>
