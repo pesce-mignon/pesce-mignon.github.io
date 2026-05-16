@@ -1,18 +1,65 @@
-// Include system for pesce-mignon
+// Include system for pesce-mignon with language support
 // Usage: Add <div data-include="path/to/file.html"></div> to your HTML
 (function() {
+    const lang = localStorage.getItem('lang') || 'en';
+    
     function includeHTML() {
         const elements = document.querySelectorAll('[data-include]');
-        elements.forEach(el => {
+        
+        // First pass: load all includes
+        Promise.all(Array.from(elements).map(el => {
             const file = el.dataset.include;
-            fetch(file)
+            return fetch(file)
                 .then(response => response.text())
                 .then(html => {
                     el.outerHTML = html;
-                    // Fix home link based on current path
-                    fixHomeLink();
                 })
                 .catch(err => console.error('Include error:', err));
+        }))
+        .then(() => {
+            // After includes are loaded, set up language
+            setupLanguage();
+        });
+    }
+    
+    function setupLanguage() {
+        // Set language class on html element
+        document.documentElement.classList.remove('en-lang', 'fr-lang');
+        document.documentElement.classList.add(lang + '-lang');
+        
+        // Add language switcher to header
+        const header = document.querySelector('header');
+        if (header) {
+            const switcher = document.createElement('div');
+            switcher.className = 'lang-switcher';
+            switcher.innerHTML = `
+                <a href="#" data-lang="en" class="${lang === 'en' ? 'active' : ''}">EN</a>
+                <a href="#" data-lang="fr" class="${lang === 'fr' ? 'active' : ''}">FR</a>
+            `;
+            header.appendChild(switcher);
+            
+            switcher.addEventListener('click', function(e) {
+                e.preventDefault();
+                const target = e.target.closest('a');
+                if (target && target.dataset.lang) {
+                    setLang(target.dataset.lang);
+                }
+            });
+        }
+        
+        // Fix home link based on current path
+        fixHomeLink();
+    }
+    
+    function setLang(l) {
+        localStorage.setItem('lang', l);
+        document.documentElement.classList.remove('en-lang', 'fr-lang');
+        document.documentElement.classList.add(l + '-lang');
+        
+        // Update switcher active state
+        const links = document.querySelectorAll('.lang-switcher a');
+        links.forEach(link => {
+            link.classList.toggle('active', link.dataset.lang === l);
         });
     }
     
@@ -26,10 +73,8 @@
         if (isRoot) {
             homeLink.href = '.';
         } else {
-            // Count path depth
             const parts = path.split('/').filter(Boolean);
-            const depth = parts.length;
-            homeLink.href = '../'.repeat(depth);
+            homeLink.href = '../'.repeat(parts.length);
         }
     }
     
@@ -37,5 +82,10 @@
         document.addEventListener('DOMContentLoaded', includeHTML);
     } else {
         includeHTML();
+    }
+    
+    // Also run setupLanguage if already loaded (for direct script calls)
+    if (document.readyState !== 'loading') {
+        setTimeout(setupLanguage, 100);
     }
 })();
