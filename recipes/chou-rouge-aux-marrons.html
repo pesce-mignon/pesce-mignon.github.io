@@ -1,14 +1,23 @@
 <!DOCTYPE html>
 <html lang="en">
-<div data-include="includes/head.html"></div>
-
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chou rouge aux marrons - Pesce Mignon</title>
+    <link rel="stylesheet" href="../style.css">
+</head>
 <body>
-    <div data-include="../includes/header.html"></div>
+    <header>
+        <h1><a href="..">Pesce Mignon</a></h1>
+        <p class="subtitle"><span class="en-text">personal experiences & recipes</span><span class="fr-text">expériences personnelles & recettes</span></p>
+    </header>
     
     <main>
         <article class="content">
             <h2><span class="en-text">Red Cabbage with Chestnuts</span><span class="fr-text">Chou rouge aux marrons</span></h2>
             <p class="meta"><span class="en-text">Recipe by Jean-Pierre Schlagg</span><span class="fr-text">Recette de Jean-Pierre Schlagg</span> &mdash; <time datetime="2024-11-09">Nov 9, 2024</time></p>
+            
+            <p><em><span class="en-text">Recipe from Jean-Pierre Schlagg.</span><span class="fr-text">Recette de Jean-Pierre Schlagg.</span></em></p>
             
             <table class="table-meta">
                 <tr>
@@ -57,9 +66,13 @@
         </article>
     </main>
     
-    <div data-include="../includes/footer.html"></div>
+    <footer>
+        <p>© <span id="year"></span> pesce-mignon</p>
+    </footer>
     
-    
-    <script src="../js/includes.js"></script>
+    <script src="../js/lang.js"></script>
+    <script>
+        document.getElementById('year').textContent = new Date().getFullYear();
+    </script>
 </body>
 </html>

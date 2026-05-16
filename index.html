@@ -7,7 +7,10 @@
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <div data-include="includes/header.html"></div>
+    <header>
+        <h1><a href=".">Pesce Mignon</a></h1>
+        <p class="subtitle"><span class="en-text">personal experiences & recipes</span><span class="fr-text">expériences personnelles & recettes</span></p>
+    </header>
     
     <main>
         <section class="content">
@@ -35,9 +38,11 @@
         </section>
     </main>
     
-    <div data-include="includes/footer.html"></div>
+    <footer>
+        <p>© <span id="year"></span> pesce-mignon</p>
+    </footer>
     
-    <script src="js/includes.js"></script>
+    <script src="js/lang.js"></script>
     <script>
         document.getElementById('year').textContent = new Date().getFullYear();
     </script>
